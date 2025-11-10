@@ -1,7 +1,10 @@
+import argparse
 import boto3
-import yaml
 import uuid
 import time
+import yaml
+
+from pathlib import Path
 
 iotsitewise = boto3.client('iotsitewise')
 kinesisvideo = boto3.client('kinesisvideo')
@@ -9,12 +12,20 @@ secretsmanager = boto3.client('secretsmanager')
 
 class resourceManager():
 
-    def __init__(self):
+    def __init__(self, config_path=None):
         # Please do not change these values. Otherwise EdgeConnectorForKVS could not set start correctly.
         self.hubType = "EdgeConnectorForKVSHubAsset"
         self.cameraType = "EdgeConnectorForKVSCameraAsset"
         self.sitewise_asset_model_name_hub_prefix = "EdgeConnectorForKVSHubModel"
         self.sitewise_asset_model_name_camera_prefix = "EdgeConnectorForKVSCameraModel"
+
+        script_dir = Path(__file__).parent
+        default_config_path = script_dir / "resource_configure.yml"
+        if config_path:
+            candidate_path = Path(config_path).expanduser()
+            self.config_path = candidate_path if candidate_path.is_absolute() else (Path.cwd() / candidate_path)
+        else:
+            self.config_path = default_config_path
 
         self.hubs = []
         self.cameras = []
@@ -36,22 +47,25 @@ class resourceManager():
 
     # Read configuration from resource_configure.yml file
     def configuration_reader(self):
-        with open("./resource_configure.yml", "r") as stream:
-            try:
-                configure = yaml.safe_load(stream)
-                for key in configure:
-                    assetConfigure = configure.get(key)
-                    if assetConfigure.get("Type") is not None:
-                        if assetConfigure.get("Type") == self.hubType:
-                            self.hubs.append(assetConfigure)
-                        elif assetConfigure.get("Type") == self.cameraType:
-                            self.cameras.append(assetConfigure)
+        try:
+            with self.config_path.open("r") as stream:
+                try:
+                    configure = yaml.safe_load(stream)
+                    for key in configure:
+                        assetConfigure = configure.get(key)
+                        if assetConfigure.get("Type") is not None:
+                            if assetConfigure.get("Type") == self.hubType:
+                                self.hubs.append(assetConfigure)
+                            elif assetConfigure.get("Type") == self.cameraType:
+                                self.cameras.append(assetConfigure)
+                            else:
+                                raise TypeError(key + " unknown type! Please choose from EdgeConnectorForKVSHubAsset or EdgeConnectorForKVSCameraAsset")
                         else:
-                            raise TypeError(key + " unknown type! Please choose from EdgeConnectorForKVSHubAsset or EdgeConnectorForKVSCameraAsset")
-                    else:
-                        raise TypeError(key + " must have a Type!")
-            except yaml.YAMLError as exc:
-                print(exc)
+                            raise TypeError(key + " must have a Type!")
+                except yaml.YAMLError as exc:
+                    print(exc)
+        except FileNotFoundError as exc:
+            raise FileNotFoundError("Configuration file not found: {}".format(self.config_path)) from exc
 
     # First verify if EdgeConnectorForKVSHubModel and EdgeConnectorForKVSCameraModel exists
     # If not, create these models with 4 digital hash suffix
@@ -455,6 +469,20 @@ class resourceManager():
         )
         return response.get('ARN')
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Create AWS IoT SiteWise assets and resources for Edge Connector for Kinesis Video Streams."
+    )
+    parser.add_argument(
+        "-c",
+        "--config",
+        help="Path to the resource_configure YAML file. Defaults to resource_configure.yml next to this script.",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    manager = resourceManager()
+    args = parse_args()
+    manager = resourceManager(config_path=args.config)
     manager.init_resources()

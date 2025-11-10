@@ -1,0 +1,16 @@
+HubAsset:
+  Type: "EdgeConnectorForKVSHubAsset"
+  Name: "DunhillOrindaSqGarBHub"
+  HubName: "DunhillOrindaSqGarBHub"
+  ChildrenCameraSiteWiseAssetName: ["DunhillOrindaSqGarCameraAssetB"]
+
+CameraAsset:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "DunhillOrindaSqGarCameraAssetB"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "dunhill-ornd_sq_gar-stream-b"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: rtsp://admin:admin1357@172.16.55.195:554/cam/realmonitor?channel=1&subtype=0
