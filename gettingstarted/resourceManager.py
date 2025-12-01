@@ -20,7 +20,7 @@ class resourceManager():
         self.sitewise_asset_model_name_camera_prefix = "EdgeConnectorForKVSCameraModel"
 
         script_dir = Path(__file__).parent
-        default_config_path = script_dir / "resource_configure.yml"
+        default_config_path = script_dir / "resource_configure_McCordDevRedemptionSqGarBHub.yml"
         if config_path:
             candidate_path = Path(config_path).expanduser()
             self.config_path = candidate_path if candidate_path.is_absolute() else (Path.cwd() / candidate_path)

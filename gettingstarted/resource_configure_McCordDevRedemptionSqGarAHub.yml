@@ -1,0 +1,16 @@
+HubAsset:
+  Type: "EdgeConnectorForKVSHubAsset"
+  Name: "McCordDevRedemptionSqGarAHub"
+  HubName: "McCordDevRedemptionSqGarAHub"
+  ChildrenCameraSiteWiseAssetName: ["McCordDevRedemptionSqGarACameraAssetA"]
+
+CameraAsset:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "McCordDevRedemptionSqGarACameraAssetA"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "mccorddev-redemption_sq_gar-a-stream-a"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: rtsp://admin:admin1357@172.16.60.195:554/cam/realmonitor?channel=1&subtype=0
