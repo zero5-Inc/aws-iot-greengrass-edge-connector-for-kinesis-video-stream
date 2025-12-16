@@ -13,7 +13,7 @@ CameraAsset1:
   KinesisVideoStreamName: "mccorddev-redemption_sq_gar-b-stream-a"
   LiveStreamingStartTime: "* * * * *"
   LiveStreamingDurationInMinutes: 10
-  RTSPStream: rtsp://admin:admin1357@172.16.60.196:554/cam/realmonitor?channel=1&subtype=0
+  RTSPStream: rtsp://admin:admin1357@172.16.60.197:554/cam/realmonitor?channel=1&subtype=0
 
 CameraAsset2:
   Type: "EdgeConnectorForKVSCameraAsset"
@@ -24,4 +24,4 @@ CameraAsset2:
   KinesisVideoStreamName: "mccorddev-redemption_sq_gar-b-stream-b"
   LiveStreamingStartTime: "* * * * *"
   LiveStreamingDurationInMinutes: 10
-  RTSPStream: rtsp://admin:admin1357@172.16.60.197:554/cam/realmonitor?channel=1&subtype=0
+  RTSPStream: rtsp://admin:admin1357@172.16.60.198:554/cam/realmonitor?channel=1&subtype=0
