@@ -1,0 +1,16 @@
+HubAsset:
+  Type: "EdgeConnectorForKVSHubAsset"
+  Name: "GuardianMadangGarAHub"
+  HubName: "GuardianMadangGarAHub"
+  ChildrenCameraSiteWiseAssetName: ["GuardianMadangGarACameraAssetA"]
+
+CameraAsset:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "GuardianMadangGarACameraAssetA"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "guardian_bldg-madang_mall_gar-a-stream-a"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: rtsp://admin:admin1357@172.16.63.196:554/cam/realmonitor?channel=1&subtype=0
