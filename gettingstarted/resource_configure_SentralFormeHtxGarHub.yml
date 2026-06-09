@@ -1,0 +1,29 @@
+HubAsset:
+  Type: "EdgeConnectorForKVSHubAsset"
+  Name: "SentralFormeHtxGarHub"
+  HubName: "SentralFormeHtxGarHub"
+  ChildrenCameraSiteWiseAssetName: 
+    - "SentralFormeHtxGarCameraAssetA"
+    - "SentralFormeHtxGarCameraAssetB"
+
+CameraAssetA:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "SentralFormeHtxGarCameraAssetA"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "sentral-forme_htx_gar-stream-a"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: "rtsp://admin:admin1357@172.16.63.198:554/cam/realmonitor?channel=1&subtype=0"
+
+CameraAssetB:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "SentralFormeHtxGarCameraAssetB"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "sentral-forme_htx_gar-stream-b"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: "rtsp://admin:admin1357@172.16.63.197:554/cam/realmonitor?channel=1&subtype=0"

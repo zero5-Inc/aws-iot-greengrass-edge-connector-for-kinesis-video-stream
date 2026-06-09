@@ -1,0 +1,29 @@
+HubAsset:
+  Type: "EdgeConnectorForKVSHubAsset"
+  Name: "Lovett1818WashingtonLotHub"
+  HubName: "Lovett1818WashingtonLotHub"
+  ChildrenCameraSiteWiseAssetName: 
+    - "Lovett1818WashingtonLotCameraAssetA"
+    - "Lovett1818WashingtonLotCameraAssetB"
+
+CameraAssetA:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "Lovett1818WashingtonLotCameraAssetA"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "lovett-1818_washington_lot-stream-a"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: "rtsp://admin:admin1357@172.16.61.198:554/cam/realmonitor?channel=1&subtype=0"
+
+CameraAssetB:
+  Type: "EdgeConnectorForKVSCameraAsset"
+  Name: "Lovett1818WashingtonLotCameraAssetB"
+  CaptureStartTime: "* * * * *"
+  CaptureDurationInMinutes: 10
+  LocalDataRetentionPeriodInMinutes: 60
+  KinesisVideoStreamName: "lovett-1818_washington_lot-stream-b"
+  LiveStreamingStartTime: "* * * * *"
+  LiveStreamingDurationInMinutes: 10
+  RTSPStream: "rtsp://admin:admin1357@172.16.61.195:554/cam/realmonitor?channel=2&subtype=0"
